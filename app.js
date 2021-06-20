@@ -189,10 +189,10 @@ var UIController=(function(){
             // Create html string with placeholder
             if(type === "inc"){
                 element=DOMstrings.incomeContainer;
-                html='<div class="item clearfix" id="inc-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+                html='<div class="item clearfix" id="inc-%id%" onclick="showControls(event)"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
             }else if(type === "exp"){
                 element=DOMstrings.expenseContainer;
-                html='<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+                html='<div class="item clearfix" id="exp-%id%" onclick="showControls(event)"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
             }
 
             // Replace placeholder with text
@@ -213,12 +213,6 @@ var UIController=(function(){
         },
 
         clearFields : function(){
-            // var field1,field2;
-            // field1=document.querySelector(DOMstrings.inputDescription);
-            // field2=document.querySelector(DOMstrings.inputValue);
-            // field1.value="";
-            // field2.value="";
-            // field1.focus();
             var fields,fieldsArr;
             fields=document.querySelectorAll(DOMstrings.inputDescription+","+DOMstrings.inputValue);
             fieldsArr=Array.prototype.slice.call(fields);
@@ -271,6 +265,7 @@ var UIController=(function(){
             for ( var i=0; i < fields.length; i++){
                 fields[i].classList.toggle("red-focus");
             }
+
             document.querySelector(DOMstrings.inputBtn).classList.toggle("red");
         }
     };
@@ -280,6 +275,8 @@ var UIController=(function(){
 
 //Global0 App Controller
 var controller=(function(budgetCtrl,UICtrl){
+    // Initializing default type
+    document.querySelector(".add__type").selectedIndex = 0;
 
     var setupEventListeners=function(){
         var DOM=UICtrl.getDOMstrings();
@@ -334,7 +331,7 @@ var controller=(function(budgetCtrl,UICtrl){
               
               //Add item to the UI
               UICtrl.addNewItem(newItem,input.type);
-              
+
               // Clearing input fields
               UICtrl.clearFields();
               
@@ -343,6 +340,8 @@ var controller=(function(budgetCtrl,UICtrl){
 
               // Update the percentages
               updatePercentages();
+        } else {
+            alert("Enter valid inputs");
         }
         
 

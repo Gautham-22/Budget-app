@@ -121,25 +121,19 @@
             
         </div>
         <script>
-            // for handling onhover controls in touch screen device
-            // function showControls(e) {
-            //     var id = e.target.id;
-            //     console.log("Yes");
-            //     document.querySelector(`#${id} .item__delete--btn`).style.display = "block";
-            //     document.querySelector(`#${id} .item__value`).style.transform = "translateX(-20px)";
-            //     if( document.querySelector(`#${id} .item__percentage`)) {
-            //         document.querySelector(`#${id} .item__percentage`).style.transform = "translateX(-20px)";
-            //     }
-        
-            //     setTimeout(function() {
-            //         console.log("Yes Yes");
-            //         document.querySelector(`#${id} .item__delete--btn`).style.display = "none";
-            //         document.querySelector(`#${id} .item__value`).style.transform = "translateX(20px)";
-            //         if( document.querySelector(`#${id} .item__percentage`)) {
-            //             document.querySelector(`#${id} .item__percentage`).style.transform = "translateX(20px)";
-            //         }
-            //     },5000);
-            // }
+            // for handling controls in touch screen device
+
+            function isTouchDevice() {
+                return (('ontouchstart' in window) ||
+                    (navigator.maxTouchPoints > 0) ||
+                    (navigator.msMaxTouchPoints > 0));
+            }
+            if(isTouchDevice()) {
+                console.log(document.querySelector("head"));
+                const styles = '<style>.item .item__delete--btn { display: block; }.item .item__value { transform: translateX(-20px); }.item .item__percentage { transform: translateX(-20px); }.unpaid .item__description { font-weight: 900; }</style>';
+                document.querySelector("head").innerHTML += styles;
+            }
+
         </script>
         <script src="app.js"></script>
     </body>
